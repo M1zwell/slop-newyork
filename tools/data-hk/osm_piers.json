@@ -1,0 +1,1489 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-23T07:45:21Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 207179354,
+  "bounds": {
+    "minlat": 22.3005666,
+    "minlon": 114.1657677,
+    "maxlat": 22.3009070,
+    "maxlon": 114.1662433
+  },
+  "nodes": [
+    2173359528,
+    7062268815,
+    506470943,
+    2173359529,
+    2173359528
+  ],
+  "geometry": [
+    { "lat": 22.3005666, "lon": 114.1658202 },
+    { "lat": 22.3008365, "lon": 114.1662433 },
+    { "lat": 22.3009070, "lon": 114.1661908 },
+    { "lat": 22.3006370, "lon": 114.1657677 },
+    { "lat": 22.3005666, "lon": 114.1658202 }
+  ],
+  "tags": {
+    "area": "yes",
+    "man_made": "breakwater",
+    "material": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 389896948,
+  "bounds": {
+    "minlat": 22.2851690,
+    "minlon": 114.1624967,
+    "maxlat": 22.2855269,
+    "maxlon": 114.1632365
+  },
+  "nodes": [
+    1723726333,
+    3930556102,
+    3930556099,
+    3930556097,
+    1723726330,
+    13598174030,
+    1723726335,
+    12578104752,
+    8481394807,
+    1723726337,
+    1723726339,
+    8481394800,
+    8481394803,
+    1723726341,
+    8481394801,
+    8481394802,
+    12578104751,
+    1723726343,
+    13598174032,
+    1723726333
+  ],
+  "geometry": [
+    { "lat": 22.2853239, "lon": 114.1624967 },
+    { "lat": 22.2853077, "lon": 114.1625027 },
+    { "lat": 22.2852517, "lon": 114.1625233 },
+    { "lat": 22.2851856, "lon": 114.1625476 },
+    { "lat": 22.2851690, "lon": 114.1625537 },
+    { "lat": 22.2851806, "lon": 114.1625880 },
+    { "lat": 22.2853803, "lon": 114.1631938 },
+    { "lat": 22.2853961, "lon": 114.1632211 },
+    { "lat": 22.2854084, "lon": 114.1632307 },
+    { "lat": 22.2854273, "lon": 114.1632363 },
+    { "lat": 22.2854453, "lon": 114.1632365 },
+    { "lat": 22.2854709, "lon": 114.1632348 },
+    { "lat": 22.2854902, "lon": 114.1632275 },
+    { "lat": 22.2855078, "lon": 114.1632123 },
+    { "lat": 22.2855202, "lon": 114.1631914 },
+    { "lat": 22.2855253, "lon": 114.1631694 },
+    { "lat": 22.2855269, "lon": 114.1631511 },
+    { "lat": 22.2855229, "lon": 114.1631289 },
+    { "lat": 22.2853343, "lon": 114.1625297 },
+    { "lat": 22.2853239, "lon": 114.1624967 }
+  ],
+  "tags": {
+    "access": "yes",
+    "area": "yes",
+    "covered": "yes",
+    "loc_ref": "10",
+    "man_made": "pier",
+    "name": "中環10號碼頭 Central Pier Number 10",
+    "name:en": "Central Pier Number 10",
+    "name:zh": "中環10號碼頭",
+    "name:zh-Hans": "中环10号码头",
+    "name:zh-Hant": "中環10號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "open_face_wharf",
+    "seamark:type": "shoreline_construction"
+  }
+},
+{
+  "type": "way",
+  "id": 389896949,
+  "bounds": {
+    "minlat": 22.2858780,
+    "minlon": 114.1622363,
+    "maxlat": 22.2862354,
+    "maxlon": 114.1629815
+  },
+  "nodes": [
+    3930556110,
+    281657436,
+    13598174027,
+    13289116386,
+    281657438,
+    12578104750,
+    8477675122,
+    1723726347,
+    8477675121,
+    8477649116,
+    8477675120,
+    1723726350,
+    8477675119,
+    12578104749,
+    1723726352,
+    8477675118,
+    1723726354,
+    8477675117,
+    281657437,
+    9806787474,
+    13598174026,
+    12578104746,
+    8477649112,
+    3930556112,
+    3930556110
+  ],
+  "geometry": [
+    { "lat": 22.2858971, "lon": 114.1622857 },
+    { "lat": 22.2858780, "lon": 114.1622927 },
+    { "lat": 22.2858859, "lon": 114.1623175 },
+    { "lat": 22.2859793, "lon": 114.1626097 },
+    { "lat": 22.2860784, "lon": 114.1629194 },
+    { "lat": 22.2860869, "lon": 114.1629362 },
+    { "lat": 22.2860963, "lon": 114.1629513 },
+    { "lat": 22.2861090, "lon": 114.1629644 },
+    { "lat": 22.2861222, "lon": 114.1629731 },
+    { "lat": 22.2861376, "lon": 114.1629791 },
+    { "lat": 22.2861564, "lon": 114.1629815 },
+    { "lat": 22.2861761, "lon": 114.1629787 },
+    { "lat": 22.2861942, "lon": 114.1629707 },
+    { "lat": 22.2862060, "lon": 114.1629619 },
+    { "lat": 22.2862161, "lon": 114.1629509 },
+    { "lat": 22.2862253, "lon": 114.1629360 },
+    { "lat": 22.2862310, "lon": 114.1629203 },
+    { "lat": 22.2862339, "lon": 114.1629003 },
+    { "lat": 22.2862354, "lon": 114.1628757 },
+    { "lat": 22.2861299, "lon": 114.1625504 },
+    { "lat": 22.2860396, "lon": 114.1622627 },
+    { "lat": 22.2860313, "lon": 114.1622363 },
+    { "lat": 22.2860140, "lon": 114.1622429 },
+    { "lat": 22.2859600, "lon": 114.1622626 },
+    { "lat": 22.2858971, "lon": 114.1622857 }
+  ],
+  "tags": {
+    "area": "yes",
+    "covered": "yes",
+    "ferry": "private",
+    "loc_ref": "9",
+    "man_made": "pier",
+    "name": "中環9號碼頭 Central Pier Number 9",
+    "name:en": "Central Pier Number 9",
+    "name:zh": "中環9號碼頭",
+    "name:zh-Hans": "中环9号码头",
+    "name:zh-Hant": "中環9號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "open_face_wharf",
+    "seamark:type": "shoreline_construction",
+    "stroller": "limited",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 558839385,
+  "bounds": {
+    "minlat": 22.2827715,
+    "minlon": 114.1690918,
+    "maxlat": 22.2827904,
+    "maxlon": 114.1693485
+  },
+  "nodes": [
+    5390065240,
+    5390065247
+  ],
+  "geometry": [
+    { "lat": 22.2827904, "lon": 114.1690918 },
+    { "lat": 22.2827715, "lon": 114.1693485 }
+  ],
+  "tags": {
+    "construction": "yes",
+    "man_made": "pier"
+  }
+},
+{
+  "type": "way",
+  "id": 583453339,
+  "bounds": {
+    "minlat": 22.2969390,
+    "minlon": 114.1660676,
+    "maxlat": 22.2974056,
+    "maxlon": 114.1678276
+  },
+  "nodes": [
+    5578043440,
+    5578043439,
+    10875906661,
+    10875906660,
+    10875906659,
+    10875906658,
+    32899716,
+    32899715,
+    5578043441,
+    10875906640,
+    32899718,
+    32899717,
+    10875906654,
+    10875906655,
+    10875906656,
+    10875906657,
+    5578043440
+  ],
+  "geometry": [
+    { "lat": 22.2969607, "lon": 114.1660871 },
+    { "lat": 22.2970423, "lon": 114.1660686 },
+    { "lat": 22.2970520, "lon": 114.1660676 },
+    { "lat": 22.2970601, "lon": 114.1660693 },
+    { "lat": 22.2970664, "lon": 114.1660738 },
+    { "lat": 22.2970712, "lon": 114.1660811 },
+    { "lat": 22.2970742, "lon": 114.1660911 },
+    { "lat": 22.2973462, "lon": 114.1674912 },
+    { "lat": 22.2974056, "lon": 114.1677971 },
+    { "lat": 22.2973241, "lon": 114.1678156 },
+    { "lat": 22.2972713, "lon": 114.1678276 },
+    { "lat": 22.2969399, "lon": 114.1661216 },
+    { "lat": 22.2969390, "lon": 114.1661111 },
+    { "lat": 22.2969406, "lon": 114.1661024 },
+    { "lat": 22.2969448, "lon": 114.1660955 },
+    { "lat": 22.2969515, "lon": 114.1660904 },
+    { "lat": 22.2969607, "lon": 114.1660871 }
+  ],
+  "tags": {
+    "access": "yes",
+    "amenity": "parking",
+    "boat": "no",
+    "fee": "1",
+    "man_made": "pier",
+    "name": "3號碼頭 Pier No.3",
+    "name:en": "Pier No.3",
+    "name:zh": "3號碼頭",
+    "parking": "surface",
+    "pier": "piled",
+    "ref": "P3",
+    "seamark:shoreline_construction:category": "open_face_wharf",
+    "seamark:shoreline_construction:restriction": "no_berthing",
+    "seamark:type": "shoreline_construction",
+    "ship": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 706734009,
+  "bounds": {
+    "minlat": 22.2836511,
+    "minlon": 114.1744810,
+    "maxlat": 22.2839926,
+    "maxlon": 114.1747037
+  },
+  "nodes": [
+    6641207748,
+    6641207755,
+    6641207757,
+    6641207749,
+    6641207750,
+    6641207751,
+    6641207748
+  ],
+  "geometry": [
+    { "lat": 22.2839926, "lon": 114.1745713 },
+    { "lat": 22.2839199, "lon": 114.1745497 },
+    { "lat": 22.2837621, "lon": 114.1745029 },
+    { "lat": 22.2836885, "lon": 114.1744810 },
+    { "lat": 22.2836511, "lon": 114.1746169 },
+    { "lat": 22.2839569, "lon": 114.1747037 },
+    { "lat": 22.2839926, "lon": 114.1745713 }
+  ],
+  "tags": {
+    "access": "private",
+    "area": "yes",
+    "floating": "yes",
+    "man_made": "pier"
+  }
+},
+{
+  "type": "way",
+  "id": 1240365457,
+  "bounds": {
+    "minlat": 22.2883003,
+    "minlon": 114.1552818,
+    "maxlat": 22.2889261,
+    "maxlon": 114.1559015
+  },
+  "nodes": [
+    8916263520,
+    566141130,
+    13610008147,
+    13610008153,
+    13610008143,
+    13610008152,
+    235147907,
+    566140624,
+    235147817,
+    8916263520
+  ],
+  "geometry": [
+    { "lat": 22.2888770, "lon": 114.1557675 },
+    { "lat": 22.2884129, "lon": 114.1552818 },
+    { "lat": 22.2884012, "lon": 114.1553296 },
+    { "lat": 22.2883452, "lon": 114.1555574 },
+    { "lat": 22.2883306, "lon": 114.1556166 },
+    { "lat": 22.2883162, "lon": 114.1556756 },
+    { "lat": 22.2883003, "lon": 114.1557401 },
+    { "lat": 22.2889073, "lon": 114.1559015 },
+    { "lat": 22.2889261, "lon": 114.1558190 },
+    { "lat": 22.2888770, "lon": 114.1557675 }
+  ],
+  "tags": {
+    "alt_name": "中環1號碼頭 Central Pier 1",
+    "alt_name:en": "Central Pier 1",
+    "alt_name:zh": "中環1號碼頭",
+    "area": "yes",
+    "loc_ref": "1",
+    "man_made": "pier",
+    "name": "中區政府碼頭 Central Government Pier",
+    "name:en": "Central Government Pier",
+    "name:zh": "中區政府碼頭",
+    "name:zh-Hans": "中区政府码头",
+    "name:zh-Hant": "中區政府碼頭",
+    "ownership": "government",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction"
+  }
+},
+{
+  "type": "way",
+  "id": 1434843242,
+  "bounds": {
+    "minlat": 22.3004105,
+    "minlon": 114.1666576,
+    "maxlat": 22.3004382,
+    "maxlon": 114.1670409
+  },
+  "nodes": [
+    13072784957,
+    6201038115
+  ],
+  "geometry": [
+    { "lat": 22.3004382, "lon": 114.1670409 },
+    { "lat": 22.3004105, "lon": 114.1666576 }
+  ],
+  "tags": {
+    "access:ferry": "private",
+    "boat": "no",
+    "ferry": "yes",
+    "floating": "yes",
+    "man_made": "pier",
+    "public_transport": "platform",
+    "public_transport:ferry": "yes",
+    "ship": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 1434843259,
+  "bounds": {
+    "minlat": 22.3000290,
+    "minlon": 114.1666850,
+    "maxlat": 22.3001574,
+    "maxlon": 114.1670736
+  },
+  "nodes": [
+    13072784936,
+    13075283342,
+    13072784934,
+    13072784935,
+    13072784939,
+    13072784947,
+    13072784940,
+    13072784941,
+    13072784942,
+    13072784944,
+    13072784943,
+    13072784938,
+    13072784937,
+    13072784945,
+    13072784948,
+    13072784946,
+    13072784936
+  ],
+  "geometry": [
+    { "lat": 22.3000458, "lon": 114.1670733 },
+    { "lat": 22.3000925, "lon": 114.1670734 },
+    { "lat": 22.3001574, "lon": 114.1670736 },
+    { "lat": 22.3001543, "lon": 114.1669314 },
+    { "lat": 22.3001387, "lon": 114.1669314 },
+    { "lat": 22.3001363, "lon": 114.1668640 },
+    { "lat": 22.3001313, "lon": 114.1667213 },
+    { "lat": 22.3001184, "lon": 114.1667205 },
+    { "lat": 22.3001184, "lon": 114.1666850 },
+    { "lat": 22.3000441, "lon": 114.1666872 },
+    { "lat": 22.3000447, "lon": 114.1667149 },
+    { "lat": 22.3000290, "lon": 114.1667145 },
+    { "lat": 22.3000304, "lon": 114.1668123 },
+    { "lat": 22.3000397, "lon": 114.1668133 },
+    { "lat": 22.3000404, "lon": 114.1668701 },
+    { "lat": 22.3000412, "lon": 114.1669307 },
+    { "lat": 22.3000458, "lon": 114.1670733 }
+  ],
+  "tags": {
+    "access:ferry": "private",
+    "area": "yes",
+    "boat": "no",
+    "ferry": "yes",
+    "floating": "yes",
+    "man_made": "pier",
+    "public_transport": "platform",
+    "public_transport:ferry": "yes",
+    "ship": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 1443753442,
+  "bounds": {
+    "minlat": 22.2977457,
+    "minlon": 114.1654988,
+    "maxlat": 22.2983770,
+    "maxlon": 114.1676284
+  },
+  "nodes": [
+    32899712,
+    7480377370,
+    10875906664,
+    10875906663,
+    73540400,
+    73994048,
+    73786561,
+    32899712
+  ],
+  "geometry": [
+    { "lat": 22.2981493, "lon": 114.1676284 },
+    { "lat": 22.2981669, "lon": 114.1676244 },
+    { "lat": 22.2981781, "lon": 114.1676218 },
+    { "lat": 22.2983486, "lon": 114.1675831 },
+    { "lat": 22.2983770, "lon": 114.1675767 },
+    { "lat": 22.2979733, "lon": 114.1654988 },
+    { "lat": 22.2977457, "lon": 114.1655505 },
+    { "lat": 22.2981493, "lon": 114.1676284 }
+  ],
+  "tags": {
+    "access": "private",
+    "addr": "main",
+    "addr:housename": "海港城 Harbour City",
+    "addr:housename:en": "Harbour City",
+    "addr:housename:zh": "海港城",
+    "addr:street": "港威大道 Gateway Boulevard",
+    "addr:street:en": "Gateway Boulevard",
+    "addr:street:zh": "港威大道",
+    "addr:unit": "太平洋會 Pacific Club",
+    "addr:unit:en": "Pacific Club",
+    "addr:unit:zh": "太平洋會",
+    "address": "housename",
+    "amenity": "social_club",
+    "building": "commercial",
+    "fee": "yes",
+    "height": "15",
+    "leisure": "sports_centre",
+    "man_made": "pier",
+    "membership": "required",
+    "name": "太平洋會 Pacific Club",
+    "name:en": "Pacific Club",
+    "name:zh": "太平洋會",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "open_face_wharf",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction"
+  }
+},
+{
+  "type": "way",
+  "id": 1444260598,
+  "bounds": {
+    "minlat": 22.2942187,
+    "minlon": 114.1646081,
+    "maxlat": 22.2955986,
+    "maxlon": 114.1683596
+  },
+  "nodes": [
+    5578043189,
+    32899624,
+    5578043190,
+    5578043188,
+    5578043427,
+    1268382542,
+    13252128259,
+    1268382539,
+    1268382552,
+    1278083721,
+    13252128256,
+    5578043191,
+    5578043193,
+    13248192386,
+    32899625,
+    5578043192,
+    5578043189
+  ],
+  "geometry": [
+    { "lat": 22.2948792, "lon": 114.1646081 },
+    { "lat": 22.2948881, "lon": 114.1646100 },
+    { "lat": 22.2948964, "lon": 114.1646171 },
+    { "lat": 22.2949008, "lon": 114.1646281 },
+    { "lat": 22.2949041, "lon": 114.1646394 },
+    { "lat": 22.2955128, "lon": 114.1677619 },
+    { "lat": 22.2955292, "lon": 114.1678445 },
+    { "lat": 22.2955711, "lon": 114.1680554 },
+    { "lat": 22.2955986, "lon": 114.1682018 },
+    { "lat": 22.2949273, "lon": 114.1683596 },
+    { "lat": 22.2948267, "lon": 114.1678526 },
+    { "lat": 22.2942187, "lon": 114.1647868 },
+    { "lat": 22.2942190, "lon": 114.1647695 },
+    { "lat": 22.2942225, "lon": 114.1647628 },
+    { "lat": 22.2942262, "lon": 114.1647579 },
+    { "lat": 22.2942419, "lon": 114.1647514 },
+    { "lat": 22.2948792, "lon": 114.1646081 }
+  ],
+  "tags": {
+    "boat": "private",
+    "cruise_ship": "yes",
+    "foot": "yes",
+    "man_made": "pier",
+    "motor_vehicle": "no",
+    "name": "海運碼頭 Ocean Terminal",
+    "name:en": "Ocean Terminal",
+    "name:zh": "海運碼頭",
+    "seamark:shoreline_construction:category": "wharf",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "ship": "private"
+  }
+},
+{
+  "type": "way",
+  "id": 1482898518,
+  "bounds": {
+    "minlat": 22.2862966,
+    "minlon": 114.1617534,
+    "maxlat": 22.2870915,
+    "maxlon": 114.1623437
+  },
+  "nodes": [
+    9629295665,
+    9630925070,
+    3076434519,
+    9630925118,
+    9630925115,
+    10196791072,
+    281657428,
+    281657427,
+    7659957217,
+    9630925116,
+    9630925117,
+    2335541059,
+    12578104742,
+    9629295665
+  ],
+  "geometry": [
+    { "lat": 22.2864494, "lon": 114.1617534 },
+    { "lat": 22.2862966, "lon": 114.1621213 },
+    { "lat": 22.2864035, "lon": 114.1620799 },
+    { "lat": 22.2866475, "lon": 114.1621879 },
+    { "lat": 22.2867015, "lon": 114.1622118 },
+    { "lat": 22.2867622, "lon": 114.1622386 },
+    { "lat": 22.2869996, "lon": 114.1623437 },
+    { "lat": 22.2870915, "lon": 114.1621011 },
+    { "lat": 22.2868539, "lon": 114.1619959 },
+    { "lat": 22.2867935, "lon": 114.1619692 },
+    { "lat": 22.2867395, "lon": 114.1619453 },
+    { "lat": 22.2864954, "lon": 114.1618373 },
+    { "lat": 22.2864615, "lon": 114.1617589 },
+    { "lat": 22.2864494, "lon": 114.1617534 }
+  ],
+  "tags": {
+    "addr": "unit",
+    "addr:housename": "中環碼頭 Central Piers",
+    "addr:housename:en": "Central Piers",
+    "addr:housename:zh": "中環碼頭",
+    "addr:housenumber": "11",
+    "addr:street": "民光街 Man Kwong Street",
+    "addr:street:en": "Man Kwong Street",
+    "addr:street:zh": "民光街",
+    "addr:unit": "中環8號碼頭 Central Pier Number 8",
+    "addr:unit:en": "Central Pier Number 8",
+    "addr:unit:zh": "中環8號碼頭",
+    "area": "yes",
+    "ferry": "private",
+    "loc_ref": "8",
+    "man_made": "pier",
+    "name": "中環8號碼頭 Central Pier Number 8",
+    "name:en": "Central Pier Number 8",
+    "name:zh": "中環8號碼頭",
+    "name:zh-Hans": "中环8号码头",
+    "name:zh-Hant": "中環8號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "open_face_wharf",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction"
+  }
+},
+{
+  "type": "way",
+  "id": 1483823676,
+  "bounds": {
+    "minlat": 22.2879795,
+    "minlon": 114.1563328,
+    "maxlat": 22.2887358,
+    "maxlon": 114.1568125
+  },
+  "nodes": [
+    3897533492,
+    7765141719,
+    281657424,
+    9630925004,
+    9630924996,
+    281657425,
+    7765141739,
+    3076434530,
+    281657423,
+    281657422,
+    3897533492
+  ],
+  "geometry": [
+    { "lat": 22.2880863, "lon": 114.1564004 },
+    { "lat": 22.2883791, "lon": 114.1564816 },
+    { "lat": 22.2887358, "lon": 114.1565806 },
+    { "lat": 22.2887159, "lon": 114.1566645 },
+    { "lat": 22.2886995, "lon": 114.1567334 },
+    { "lat": 22.2886807, "lon": 114.1568125 },
+    { "lat": 22.2883245, "lon": 114.1567136 },
+    { "lat": 22.2880312, "lon": 114.1566323 },
+    { "lat": 22.2879795, "lon": 114.1566861 },
+    { "lat": 22.2880648, "lon": 114.1563328 },
+    { "lat": 22.2880863, "lon": 114.1564004 }
+  ],
+  "tags": {
+    "addr": "unit",
+    "addr:housename": "中環碼頭 Central Piers",
+    "addr:housename:en": "Central Piers",
+    "addr:housename:zh": "中環碼頭",
+    "addr:housenumber": "11",
+    "addr:street": "民光街 Man Kwong Street",
+    "addr:street:en": "Man Kwong Street",
+    "addr:street:zh": "民光街",
+    "addr:unit": "中環2號碼頭 Central Pier Number 2",
+    "addr:unit:en": "Central Pier Number 2",
+    "addr:unit:zh": "中環2號碼頭",
+    "area": "yes",
+    "ferry": "private",
+    "height": "10",
+    "loc_ref": "2",
+    "man_made": "pier",
+    "name": "中環2號碼頭 Central Pier Number 2",
+    "name:en": "Central Pier Number 2",
+    "name:zh": "中環2號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "wheelchair": "yes",
+    "wheelchair:description": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:en": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:zh": "上落時，渡輪與碼頭之間，需要幫手抬起。"
+  }
+},
+{
+  "type": "way",
+  "id": 1483823677,
+  "bounds": {
+    "minlat": 22.2877579,
+    "minlon": 114.1572516,
+    "maxlat": 22.2885176,
+    "maxlon": 114.1577425
+  },
+  "nodes": [
+    3076434529,
+    364861473,
+    8481394781,
+    8481394782,
+    235147875,
+    8481394780,
+    3897533490,
+    3076434528,
+    235147882,
+    235147832,
+    3076434529
+  ],
+  "geometry": [
+    { "lat": 22.2878784, "lon": 114.1573154 },
+    { "lat": 22.2881918, "lon": 114.1574022 },
+    { "lat": 22.2885052, "lon": 114.1574890 },
+    { "lat": 22.2885176, "lon": 114.1575116 },
+    { "lat": 22.2884660, "lon": 114.1577291 },
+    { "lat": 22.2884451, "lon": 114.1577425 },
+    { "lat": 22.2881317, "lon": 114.1576557 },
+    { "lat": 22.2878183, "lon": 114.1575688 },
+    { "lat": 22.2877579, "lon": 114.1576075 },
+    { "lat": 22.2878430, "lon": 114.1572516 },
+    { "lat": 22.2878784, "lon": 114.1573154 }
+  ],
+  "tags": {
+    "addr": "unit",
+    "addr:housename": "中環碼頭 Central Piers",
+    "addr:housename:en": "Central Piers",
+    "addr:housename:zh": "中環碼頭",
+    "addr:housenumber": "11",
+    "addr:street": "民光街 Man Kwong Street",
+    "addr:street:en": "Man Kwong Street",
+    "addr:street:zh": "民光街",
+    "addr:unit": "中環3號碼頭 Central Pier Number 3",
+    "addr:unit:en": "Central Pier Number 3",
+    "addr:unit:zh": "中環3號碼頭",
+    "area": "yes",
+    "ferry": "private",
+    "height": "10",
+    "loc_ref": "3",
+    "man_made": "pier",
+    "name": "中環3號碼頭 Central Pier Number 3",
+    "name:en": "Central Pier Number 3",
+    "name:zh": "中環3號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "wheelchair": "yes",
+    "wheelchair:description": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:en": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:zh": "上落時，渡輪與碼頭之間，需要幫手抬起。"
+  }
+},
+{
+  "type": "way",
+  "id": 1483823678,
+  "bounds": {
+    "minlat": 22.2875268,
+    "minlon": 114.1581507,
+    "maxlat": 22.2882905,
+    "maxlon": 114.1586592
+  },
+  "nodes": [
+    3076434527,
+    1281244414,
+    8481394787,
+    8481394789,
+    235147970,
+    8481394790,
+    8481394788,
+    9629295659,
+    8481394791,
+    9629295658,
+    8481394794,
+    8481394795,
+    1317015267,
+    8481394793,
+    8481394792,
+    290651786,
+    3076434526,
+    8481394796,
+    8477649087,
+    3076434527
+  ],
+  "geometry": [
+    { "lat": 22.2876764, "lon": 114.1582436 },
+    { "lat": 22.2879689, "lon": 114.1583256 },
+    { "lat": 22.2882615, "lon": 114.1584076 },
+    { "lat": 22.2882711, "lon": 114.1584120 },
+    { "lat": 22.2882803, "lon": 114.1584179 },
+    { "lat": 22.2882870, "lon": 114.1584268 },
+    { "lat": 22.2882905, "lon": 114.1584377 },
+    { "lat": 22.2882904, "lon": 114.1584494 },
+    { "lat": 22.2882456, "lon": 114.1586309 },
+    { "lat": 22.2882431, "lon": 114.1586414 },
+    { "lat": 22.2882378, "lon": 114.1586492 },
+    { "lat": 22.2882306, "lon": 114.1586552 },
+    { "lat": 22.2882222, "lon": 114.1586586 },
+    { "lat": 22.2882132, "lon": 114.1586592 },
+    { "lat": 22.2882019, "lon": 114.1586561 },
+    { "lat": 22.2879093, "lon": 114.1585741 },
+    { "lat": 22.2876168, "lon": 114.1584921 },
+    { "lat": 22.2875268, "lon": 114.1585493 },
+    { "lat": 22.2876259, "lon": 114.1581507 },
+    { "lat": 22.2876764, "lon": 114.1582436 }
+  ],
+  "tags": {
+    "addr": "unit",
+    "addr:housename": "中環碼頭 Central Piers",
+    "addr:housename:en": "Central Piers",
+    "addr:housename:zh": "中環碼頭",
+    "addr:housenumber": "11",
+    "addr:street": "民光街 Man Kwong Street",
+    "addr:street:en": "Man Kwong Street",
+    "addr:street:zh": "民光街",
+    "addr:unit": "中環4號碼頭 Central Pier Number 4",
+    "addr:unit:en": "Central Pier Number 4",
+    "addr:unit:zh": "中環4號碼頭",
+    "area": "yes",
+    "ferry": "private",
+    "height": "10",
+    "loc_ref": "4",
+    "man_made": "pier",
+    "name": "中環4號碼頭 Central Pier Number 4",
+    "name:en": "Central Pier Number 4",
+    "name:zh": "中環4號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "wheelchair": "yes",
+    "wheelchair:description": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:en": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:zh": "上落時，渡輪與碼頭之間，需要幫手抬起。"
+  }
+},
+{
+  "type": "way",
+  "id": 1483823679,
+  "bounds": {
+    "minlat": 22.2872705,
+    "minlon": 114.1590729,
+    "maxlat": 22.2880427,
+    "maxlon": 114.1596079
+  },
+  "nodes": [
+    235148013,
+    335945800,
+    8481394758,
+    8481394760,
+    235148031,
+    8481394761,
+    8481394762,
+    9629295661,
+    8481394757,
+    8481394765,
+    8481394766,
+    235148052,
+    8481394763,
+    8481394764,
+    3897533487,
+    235148072,
+    8481394751,
+    8481394754,
+    235148013
+  ],
+  "geometry": [
+    { "lat": 22.2874361, "lon": 114.1591711 },
+    { "lat": 22.2877253, "lon": 114.1592658 },
+    { "lat": 22.2880146, "lon": 114.1593604 },
+    { "lat": 22.2880258, "lon": 114.1593641 },
+    { "lat": 22.2880332, "lon": 114.1593697 },
+    { "lat": 22.2880387, "lon": 114.1593774 },
+    { "lat": 22.2880420, "lon": 114.1593865 },
+    { "lat": 22.2880427, "lon": 114.1593962 },
+    { "lat": 22.2879905, "lon": 114.1595867 },
+    { "lat": 22.2879851, "lon": 114.1595967 },
+    { "lat": 22.2879768, "lon": 114.1596041 },
+    { "lat": 22.2879668, "lon": 114.1596079 },
+    { "lat": 22.2879560, "lon": 114.1596077 },
+    { "lat": 22.2879458, "lon": 114.1596060 },
+    { "lat": 22.2876565, "lon": 114.1595114 },
+    { "lat": 22.2873673, "lon": 114.1594167 },
+    { "lat": 22.2872705, "lon": 114.1594727 },
+    { "lat": 22.2873875, "lon": 114.1590729 },
+    { "lat": 22.2874361, "lon": 114.1591711 }
+  ],
+  "tags": {
+    "addr": "unit",
+    "addr:housename": "中環碼頭 Central Piers",
+    "addr:housename:en": "Central Piers",
+    "addr:housename:zh": "中環碼頭",
+    "addr:housenumber": "11",
+    "addr:street": "民光街 Man Kwong Street",
+    "addr:street:en": "Man Kwong Street",
+    "addr:street:zh": "民光街",
+    "addr:unit": "中環5號碼頭 Central Pier Number 5",
+    "addr:unit:en": "Central Pier Number 5",
+    "addr:unit:zh": "中環5號碼頭",
+    "area": "yes",
+    "ferry": "private",
+    "height": "10",
+    "loc_ref": "5",
+    "man_made": "pier",
+    "name": "中環5號碼頭 Central Pier Number 5",
+    "name:en": "Central Pier Number 5",
+    "name:zh": "中環5號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "wheelchair": "yes",
+    "wheelchair:description": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:en": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:zh": "上落時，渡輪與碼頭之間，需要幫手抬起。"
+  }
+},
+{
+  "type": "way",
+  "id": 1483823680,
+  "bounds": {
+    "minlat": 22.2869885,
+    "minlon": 114.1599595,
+    "maxlat": 22.2877619,
+    "maxlon": 114.1605365
+  },
+  "nodes": [
+    8481394738,
+    1234318206,
+    8481394740,
+    8481394747,
+    8481394748,
+    235216338,
+    8481394749,
+    8481394750,
+    8481394741,
+    8481394743,
+    8481394744,
+    8481394745,
+    235223719,
+    8481394746,
+    8481394742,
+    426839374,
+    3076434522,
+    8481394733,
+    8481394736,
+    8481394738
+  ],
+  "geometry": [
+    { "lat": 22.2871661, "lon": 114.1600725 },
+    { "lat": 22.2873968, "lon": 114.1601614 },
+    { "lat": 22.2877367, "lon": 114.1602923 },
+    { "lat": 22.2877465, "lon": 114.1602961 },
+    { "lat": 22.2877536, "lon": 114.1603021 },
+    { "lat": 22.2877588, "lon": 114.1603100 },
+    { "lat": 22.2877616, "lon": 114.1603193 },
+    { "lat": 22.2877619, "lon": 114.1603290 },
+    { "lat": 22.2877586, "lon": 114.1603392 },
+    { "lat": 22.2877013, "lon": 114.1605166 },
+    { "lat": 22.2876954, "lon": 114.1605263 },
+    { "lat": 22.2876868, "lon": 114.1605332 },
+    { "lat": 22.2876766, "lon": 114.1605365 },
+    { "lat": 22.2876659, "lon": 114.1605358 },
+    { "lat": 22.2876549, "lon": 114.1605317 },
+    { "lat": 22.2873186, "lon": 114.1604040 },
+    { "lat": 22.2870726, "lon": 114.1603106 },
+    { "lat": 22.2869885, "lon": 114.1603554 },
+    { "lat": 22.2871165, "lon": 114.1599595 },
+    { "lat": 22.2871661, "lon": 114.1600725 }
+  ],
+  "tags": {
+    "addr": "unit",
+    "addr:housename": "中環碼頭 Central Piers",
+    "addr:housename:en": "Central Piers",
+    "addr:housename:zh": "中環碼頭",
+    "addr:housenumber": "11",
+    "addr:street": "民光街 Man Kwong Street",
+    "addr:street:en": "Man Kwong Street",
+    "addr:street:zh": "民光街",
+    "addr:unit": "中環6號碼頭 Central Pier Number 6",
+    "addr:unit:en": "Central Pier Number 6",
+    "addr:unit:zh": "中環6號碼頭",
+    "area": "yes",
+    "ferry": "private",
+    "height": "10",
+    "loc_ref": "6",
+    "man_made": "pier",
+    "name": "中環6號碼頭 Central Pier Number 6",
+    "name:en": "Central Pier Number 6",
+    "name:zh": "中環6號碼頭",
+    "name:zh-Hans": "中环6号码头",
+    "name:zh-Hant": "中環6號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "wheelchair": "yes",
+    "wheelchair:description": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:en": "When going up or down, between the ferry and the pier, you need to help lift it up.",
+    "wheelchair:description:zh": "上落時，渡輪與碼頭之間，需要幫手抬起。"
+  }
+},
+{
+  "type": "way",
+  "id": 1483823681,
+  "bounds": {
+    "minlat": 22.2866542,
+    "minlon": 114.1608557,
+    "maxlat": 22.2874452,
+    "maxlon": 114.1614697
+  },
+  "nodes": [
+    3076434521,
+    9630925110,
+    30745880,
+    9630925109,
+    235223711,
+    235223709,
+    9630925111,
+    2335541060,
+    9630925112,
+    3076434520,
+    9629295666,
+    8477675127,
+    3076434521
+  ],
+  "geometry": [
+    { "lat": 22.2868492, "lon": 114.1609634 },
+    { "lat": 22.2870931, "lon": 114.1610714 },
+    { "lat": 22.2871201, "lon": 114.1610833 },
+    { "lat": 22.2871471, "lon": 114.1610953 },
+    { "lat": 22.2874452, "lon": 114.1612271 },
+    { "lat": 22.2873533, "lon": 114.1614697 },
+    { "lat": 22.2870553, "lon": 114.1613378 },
+    { "lat": 22.2870283, "lon": 114.1613259 },
+    { "lat": 22.2870013, "lon": 114.1613140 },
+    { "lat": 22.2867573, "lon": 114.1612060 },
+    { "lat": 22.2866542, "lon": 114.1612526 },
+    { "lat": 22.2868051, "lon": 114.1608557 },
+    { "lat": 22.2868492, "lon": 114.1609634 }
+  ],
+  "tags": {
+    "addr": "unit",
+    "addr:housename": "中環碼頭 Central Piers",
+    "addr:housename:en": "Central Piers",
+    "addr:housename:zh": "中環碼頭",
+    "addr:housenumber": "11",
+    "addr:street": "民光街 Man Kwong Street",
+    "addr:street:en": "Man Kwong Street",
+    "addr:street:zh": "民光街",
+    "addr:unit": "中環7號碼頭 Central Pier Number 7",
+    "addr:unit:en": "Central Pier Number 7",
+    "addr:unit:zh": "中環7號碼頭",
+    "area": "yes",
+    "ferry": "private",
+    "loc_ref": "7",
+    "man_made": "pier",
+    "name": "中環天星碼頭 Central Star Ferry Pier",
+    "name:en": "Central Star Ferry Pier",
+    "name:zh": "中環天星碼頭",
+    "official_name": "中環7號碼頭 Central Pier Number 7",
+    "official_name:en": "Central Pier Number 7",
+    "official_name:zh": "中環7號碼頭",
+    "pier": "piled",
+    "seamark:shoreline_construction:category": "open_face_wharf",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "short_name": "天星碼頭 Star Ferry Pier",
+    "short_name:en": "Star Ferry Pier",
+    "short_name:ko": "스타 페리 선착장",
+    "short_name:zh": "天星碼頭"
+  }
+},
+{
+  "type": "relation",
+  "id": 14937823,
+  "bounds": {
+    "minlat": 22.2884009,
+    "minlon": 114.1510575,
+    "maxlat": 22.2892235,
+    "maxlon": 114.1532741
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 1117392689,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2891752, "lon": 114.1514409 },
+         { "lat": 22.2892235, "lon": 114.1512438 },
+         { "lat": 22.2891395, "lon": 114.1510917 },
+         { "lat": 22.2890120, "lon": 114.1510575 },
+         { "lat": 22.2888832, "lon": 114.1511394 },
+         { "lat": 22.2888348, "lon": 114.1513433 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117392688,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2888348, "lon": 114.1513433 },
+         { "lat": 22.2887528, "lon": 114.1516770 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117392687,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2887528, "lon": 114.1516770 },
+         { "lat": 22.2887373, "lon": 114.1517401 },
+         { "lat": 22.2887215, "lon": 114.1518047 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117392686,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2887215, "lon": 114.1518047 },
+         { "lat": 22.2885710, "lon": 114.1524175 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117392685,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2885710, "lon": 114.1524175 },
+         { "lat": 22.2885562, "lon": 114.1524779 },
+         { "lat": 22.2885401, "lon": 114.1525436 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 9562306,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2885401, "lon": 114.1525436 },
+         { "lat": 22.2884772, "lon": 114.1528165 },
+         { "lat": 22.2884009, "lon": 114.1531111 },
+         { "lat": 22.2884798, "lon": 114.1532497 },
+         { "lat": 22.2885901, "lon": 114.1532741 },
+         { "lat": 22.2887515, "lon": 114.1531688 },
+         { "lat": 22.2888132, "lon": 114.1529170 },
+         { "lat": 22.2888833, "lon": 114.1526320 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117392684,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2888833, "lon": 114.1526320 },
+         { "lat": 22.2888999, "lon": 114.1525637 },
+         { "lat": 22.2889165, "lon": 114.1524949 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117392683,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2889165, "lon": 114.1524949 },
+         { "lat": 22.2891752, "lon": 114.1514409 }
+      ]
+    }
+  ],
+  "tags": {
+    "access": "private",
+    "man_made": "pier",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 14937824,
+  "bounds": {
+    "minlat": 22.2892950,
+    "minlon": 114.1512730,
+    "maxlat": 22.2900370,
+    "maxlon": 114.1534620
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 184798514,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2894171, "lon": 114.1527828 },
+         { "lat": 22.2892950, "lon": 114.1532774 },
+         { "lat": 22.2893590, "lon": 114.1534300 },
+         { "lat": 22.2894750, "lon": 114.1534620 },
+         { "lat": 22.2895130, "lon": 114.1534380 },
+         { "lat": 22.2900370, "lon": 114.1513490 },
+         { "lat": 22.2900110, "lon": 114.1513080 },
+         { "lat": 22.2898950, "lon": 114.1512730 },
+         { "lat": 22.2897690, "lon": 114.1513520 },
+         { "lat": 22.2894503, "lon": 114.1526451 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117392682,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2894503, "lon": 114.1526451 },
+         { "lat": 22.2894337, "lon": 114.1527140 },
+         { "lat": 22.2894171, "lon": 114.1527828 }
+      ]
+    }
+  ],
+  "tags": {
+    "access": "private",
+    "man_made": "pier",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 14941151,
+  "bounds": {
+    "minlat": 22.2929484,
+    "minlon": 114.1678864,
+    "maxlat": 22.2940992,
+    "maxlon": 114.1689558
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 1117587206,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2940915, "lon": 114.1683209 },
+         { "lat": 22.2940992, "lon": 114.1683152 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1118626546,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2939322, "lon": 114.1684481 },
+         { "lat": 22.2940268, "lon": 114.1683772 },
+         { "lat": 22.2940915, "lon": 114.1683209 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117587204,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2935560, "lon": 114.1687799 },
+         { "lat": 22.2935856, "lon": 114.1687505 },
+         { "lat": 22.2936420, "lon": 114.1686944 },
+         { "lat": 22.2937587, "lon": 114.1685983 },
+         { "lat": 22.2939322, "lon": 114.1684481 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117587226,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2934271, "lon": 114.1689500 },
+         { "lat": 22.2934395, "lon": 114.1689375 },
+         { "lat": 22.2935011, "lon": 114.1688553 },
+         { "lat": 22.2935560, "lon": 114.1687799 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1117587205,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2934214, "lon": 114.1689558 },
+         { "lat": 22.2934242, "lon": 114.1689530 },
+         { "lat": 22.2934271, "lon": 114.1689500 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 745737158,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2940992, "lon": 114.1683152 },
+         { "lat": 22.2940795, "lon": 114.1682904 },
+         { "lat": 22.2940075, "lon": 114.1682545 },
+         { "lat": 22.2939619, "lon": 114.1682338 },
+         { "lat": 22.2937404, "lon": 114.1680411 },
+         { "lat": 22.2937356, "lon": 114.1680492 },
+         { "lat": 22.2937170, "lon": 114.1680338 },
+         { "lat": 22.2936967, "lon": 114.1680182 },
+         { "lat": 22.2937007, "lon": 114.1680117 },
+         { "lat": 22.2935707, "lon": 114.1679045 },
+         { "lat": 22.2935499, "lon": 114.1678904 },
+         { "lat": 22.2935394, "lon": 114.1678874 },
+         { "lat": 22.2935282, "lon": 114.1678864 },
+         { "lat": 22.2935056, "lon": 114.1678878 },
+         { "lat": 22.2934789, "lon": 114.1679018 },
+         { "lat": 22.2934603, "lon": 114.1679230 },
+         { "lat": 22.2934510, "lon": 114.1679525 },
+         { "lat": 22.2934494, "lon": 114.1679803 },
+         { "lat": 22.2934587, "lon": 114.1680108 },
+         { "lat": 22.2934845, "lon": 114.1680390 },
+         { "lat": 22.2935431, "lon": 114.1680876 },
+         { "lat": 22.2935978, "lon": 114.1681357 },
+         { "lat": 22.2936098, "lon": 114.1681462 },
+         { "lat": 22.2936223, "lon": 114.1681572 },
+         { "lat": 22.2936357, "lon": 114.1681690 },
+         { "lat": 22.2936552, "lon": 114.1681860 },
+         { "lat": 22.2937152, "lon": 114.1682388 },
+         { "lat": 22.2938769, "lon": 114.1683642 },
+         { "lat": 22.2938809, "lon": 114.1683712 },
+         { "lat": 22.2939160, "lon": 114.1684373 },
+         { "lat": 22.2937742, "lon": 114.1685640 },
+         { "lat": 22.2936309, "lon": 114.1686884 },
+         { "lat": 22.2935912, "lon": 114.1687259 },
+         { "lat": 22.2935518, "lon": 114.1687682 },
+         { "lat": 22.2934680, "lon": 114.1687491 },
+         { "lat": 22.2933554, "lon": 114.1686535 },
+         { "lat": 22.2932425, "lon": 114.1685576 },
+         { "lat": 22.2932388, "lon": 114.1685613 },
+         { "lat": 22.2932198, "lon": 114.1685480 },
+         { "lat": 22.2931975, "lon": 114.1685315 },
+         { "lat": 22.2932013, "lon": 114.1685251 },
+         { "lat": 22.2930604, "lon": 114.1684058 },
+         { "lat": 22.2930443, "lon": 114.1683977 },
+         { "lat": 22.2930244, "lon": 114.1683980 },
+         { "lat": 22.2929978, "lon": 114.1684004 },
+         { "lat": 22.2929804, "lon": 114.1684135 },
+         { "lat": 22.2929639, "lon": 114.1684289 },
+         { "lat": 22.2929549, "lon": 114.1684433 },
+         { "lat": 22.2929509, "lon": 114.1684621 },
+         { "lat": 22.2929484, "lon": 114.1684872 },
+         { "lat": 22.2929528, "lon": 114.1685094 },
+         { "lat": 22.2929701, "lon": 114.1685335 },
+         { "lat": 22.2930266, "lon": 114.1685824 },
+         { "lat": 22.2931119, "lon": 114.1686532 },
+         { "lat": 22.2931169, "lon": 114.1686594 },
+         { "lat": 22.2931316, "lon": 114.1686708 },
+         { "lat": 22.2931435, "lon": 114.1686800 },
+         { "lat": 22.2931517, "lon": 114.1686860 },
+         { "lat": 22.2932744, "lon": 114.1687900 },
+         { "lat": 22.2933768, "lon": 114.1688768 },
+         { "lat": 22.2934020, "lon": 114.1689201 },
+         { "lat": 22.2934168, "lon": 114.1689457 },
+         { "lat": 22.2934214, "lon": 114.1689558 }
+      ]
+    }
+  ],
+  "tags": {
+    "alt_name": "尖沙咀碼頭 Tsim Sha Tsui Pier",
+    "alt_name:en": "Tsim Sha Tsui Pier",
+    "alt_name:zh": "尖沙咀碼頭",
+    "area": "yes",
+    "man_made": "pier",
+    "name": "尖沙咀天星碼頭 Tsim Sha Tsui Star Ferry Pier",
+    "name:en": "Tsim Sha Tsui Star Ferry Pier",
+    "name:zh": "尖沙咀天星碼頭",
+    "official_name": "尖沙咀渡輪碼頭 Tsim Sha Tsui Ferry Pier",
+    "official_name:en": "Tsim Sha Tsui Ferry Pier",
+    "official_name:zh": "尖沙咀渡輪碼頭",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "short_name": "天星碼頭 Star Ferry Pier",
+    "short_name:en": "Star Ferry Pier",
+    "short_name:ko": "스타 페리 선착장",
+    "short_name:zh": "天星碼頭",
+    "type": "multipolygon",
+    "wikidata": "Q857264"
+  }
+},
+{
+  "type": "relation",
+  "id": 14953848,
+  "bounds": {
+    "minlat": 22.2830500,
+    "minlon": 114.1760536,
+    "maxlat": 22.2837373,
+    "maxlon": 114.1763951
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 1118341913,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2830806, "lon": 114.1763894 },
+         { "lat": 22.2830759, "lon": 114.1763951 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1118341915,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2830806, "lon": 114.1763894 },
+         { "lat": 22.2831100, "lon": 114.1763520 },
+         { "lat": 22.2831024, "lon": 114.1762663 },
+         { "lat": 22.2830985, "lon": 114.1762231 },
+         { "lat": 22.2830940, "lon": 114.1761719 },
+         { "lat": 22.2830547, "lon": 114.1761297 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1118341914,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2830500, "lon": 114.1761247 },
+         { "lat": 22.2830547, "lon": 114.1761297 }
+      ]
+    },
+    {
+      "type": "way",
+      "ref": 1118341925,
+      "role": "outer",
+      "geometry": [
+         { "lat": 22.2830759, "lon": 114.1763951 },
+         { "lat": 22.2833714, "lon": 114.1763619 },
+         { "lat": 22.2837064, "lon": 114.1763241 },
+         { "lat": 22.2837153, "lon": 114.1763223 },
+         { "lat": 22.2837203, "lon": 114.1763201 },
+         { "lat": 22.2837236, "lon": 114.1763181 },
+         { "lat": 22.2837277, "lon": 114.1763144 },
+         { "lat": 22.2837308, "lon": 114.1763105 },
+         { "lat": 22.2837339, "lon": 114.1763055 },
+         { "lat": 22.2837360, "lon": 114.1763005 },
+         { "lat": 22.2837373, "lon": 114.1762942 },
+         { "lat": 22.2837372, "lon": 114.1762877 },
+         { "lat": 22.2837168, "lon": 114.1760829 },
+         { "lat": 22.2837152, "lon": 114.1760761 },
+         { "lat": 22.2837127, "lon": 114.1760698 },
+         { "lat": 22.2837095, "lon": 114.1760653 },
+         { "lat": 22.2837056, "lon": 114.1760611 },
+         { "lat": 22.2837009, "lon": 114.1760575 },
+         { "lat": 22.2836956, "lon": 114.1760552 },
+         { "lat": 22.2836891, "lon": 114.1760539 },
+         { "lat": 22.2836817, "lon": 114.1760536 },
+         { "lat": 22.2833406, "lon": 114.1760920 },
+         { "lat": 22.2830500, "lon": 114.1761247 }
+      ]
+    }
+  ],
+  "tags": {
+    "access:ferry": "private",
+    "area": "yes",
+    "boat": "no",
+    "ferry": "yes",
+    "man_made": "pier",
+    "name": "灣仔碼頭 Wan Chai Pier",
+    "name:en": "Wan Chai Pier",
+    "name:zh": "灣仔碼頭",
+    "no:addr:street": "yes",
+    "official_name": "灣仔渡輪碼頭 Wan Chai Ferry Pier",
+    "official_name:en": "Wan Chai Ferry Pier",
+    "official_name:zh": "灣仔渡輪碼頭",
+    "public_transport:ferry": "yes",
+    "seamark:shoreline_construction:category": "pier",
+    "seamark:shoreline_construction:restriction": "restricted_berthing",
+    "seamark:type": "shoreline_construction",
+    "ship": "no",
+    "type": "multipolygon"
+  }
+}
+
+  ]
+}

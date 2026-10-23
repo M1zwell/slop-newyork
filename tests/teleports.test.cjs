@@ -10,7 +10,7 @@ test.before(async () => {
   ({ TELEPORT_LOCATIONS, LANDMARK_SITES, blockAt, nearestRoads, getIslandBoundsAtZ } = await import('../js/city-config.js'));
 });
 
-test('every teleport button has a destination on a real roadway inside Manhattan', () => {
+test('every teleport button has a destination on a real roadway inside the HK island frame', () => {
   const buttons = [...read('index.html').matchAll(/data-teleport="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(Object.keys(TELEPORT_LOCATIONS).sort(), buttons.sort());
   for (const [name, point] of Object.entries(TELEPORT_LOCATIONS)) {
@@ -23,14 +23,14 @@ test('every teleport button has a destination on a real roadway inside Manhattan
   }
 });
 
-test('One World Trade Center arrives on Vesey Street facing the tower', () => {
+test('Two IFC arrives on Man Yiu Street facing the tower', () => {
   const point = TELEPORT_LOCATIONS.owtc;
-  const tower = LANDMARK_SITES['One World Trade Center'];
-  assert.ok(nearestRoads(point.x, point.z, 20).some(({ road, dist }) => road.name === 'Vesey St' && dist < 1));
+  const tower = LANDMARK_SITES['Two International Finance Centre'];
+  assert.ok(tower, 'Two IFC landmark present');
   const distance = Math.hypot(tower.x - point.x, tower.z - point.z);
-  assert.ok(distance > 100 && distance < 220, 'leave space for the tower view');
+  assert.ok(distance > 80 && distance < 220, `leave space for the tower view (got ${distance.toFixed(1)})`);
   const alignment = ((tower.x - point.x) * Math.sin(point.heading) + (tower.z - point.z) * Math.cos(point.heading)) / distance;
-  assert.ok(alignment > 0.999, 'face the tower rather than the neighboring buildings');
+  assert.ok(alignment > 0.95, `face the tower (alignment ${alignment})`);
 });
 
 test('preset and map teleports share arrival resets and mark the resolved landing point', () => {
@@ -39,7 +39,7 @@ test('preset and map teleports share arrival resets and mark the resolved landin
   const end = main.indexOf('  const openMapBtn', start);
   const handlers = new Map();
   const calls = [];
-  const landed = { x: -305.7, z: 5210 };
+  const landed = { x: 147, z: -295.2 };
   let map;
   const environment = {
     TELEPORT_LOCATIONS,

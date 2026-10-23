@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Slop New York</title>
+  <title>Slop Hong Kong</title>
   <link rel="icon" href="data:," />
-  <meta name="description" content="Photorealistic GTA-style 3D Slop New York simulation built with Three.js WebGPURenderer and TSL shaders featuring complete Manhattan street map (125th St to Battery Park), third-person navigation (Person, Car, Cyclist, Helicopter), and 11 cinematic cameras at 60 FPS." />
+  <meta name="description" content="Photorealistic GTA-style 3D Slop Hong Kong (Central / Victoria Harbour) simulation built with Three.js WebGPURenderer and TSL shaders. Fork of Slop New York with OSM-derived HK geodata. Third-person navigation (Person, Car, Cyclist, Helicopter) and cinematic cameras at 60 FPS." />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <!-- three.js dev branch (builds committed to mrdoob/three.js@dev, served by jsDelivr) -->
   <script type="importmap">
@@ -82,24 +82,24 @@
   <!-- Loading Screen -->
   <div id="loading-overlay" role="status" aria-live="polite">
     <div class="loader">
-      <span class="mta-bullet loader-bullet" aria-hidden="true">NY</span>
-      <div class="loader-title">Slop New York</div>
+      <span class="mta-bullet loader-bullet" aria-hidden="true">HK</span>
+      <div class="loader-title">Slop Hong Kong</div>
       <div class="loader-track is-indeterminate" aria-hidden="true"><span id="loading-progress" class="loader-fill"></span></div>
       <div id="loading-status">Initializing WebGPURenderer &amp; TSL Shaders...</div>
     </div>
   </div>
 
   <!-- 3D WebGPU Viewport Container -->
-  <main id="canvas-container" aria-label="3D Interactive Slop New York Viewport"></main>
+  <main id="canvas-container" aria-label="3D Interactive Slop Hong Kong Viewport"></main>
 
   <!-- Top-Left: Brand & Renderer Telemetry -->
   <header class="hud hud-top-left">
     <div class="panel brand">
-      <span class="mta-bullet" aria-hidden="true">NY</span>
+      <span class="mta-bullet" aria-hidden="true">HK</span>
       <div class="brand-titles">
         <div class="brand-heading">
-          <h1>Slop New York</h1>
-          <a class="repo-link" href="https://github.com/mrdoob/slop-newyork/" target="_blank" rel="noopener noreferrer" aria-label="Slop New York on GitHub (opens in a new tab)">GitHub <span aria-hidden="true">↗</span></a>
+          <h1>Slop Hong Kong</h1>
+          <a class="repo-link" href="https://github.com/M1zwell/slop-newyork/" target="_blank" rel="noopener noreferrer" aria-label="Slop Hong Kong on GitHub (opens in a new tab)">GitHub <span aria-hidden="true">↗</span></a>
         </div>
         <div class="brand-subtitle">three.js · WebGPU · TSL · <span id="hud-fps" class="fps-ok">60</span> fps</div>
       </div>
@@ -127,7 +127,7 @@
       <button id="btn-teleport" class="tool-btn" type="button" popovertarget="teleport-popover" title="Teleport the active player">
         <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span class="tool-label">Teleport</span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-chevron-down"/></svg>
       </button>
-      <button id="btn-open-map" class="tool-btn" type="button" title="Full New York City street map [M]">
+      <button id="btn-open-map" class="tool-btn" type="button" title="Full Hong Kong Central street map [M]">
         <svg class="icon" aria-hidden="true"><use href="#i-map"/></svg><span class="tool-label">Map</span><kbd>M</kbd>
       </button>
       <span class="toolbar-divider" aria-hidden="true"></span>
@@ -140,20 +140,20 @@
   <!-- Teleport Destinations (native popover: light-dismiss & Esc) -->
   <div id="teleport-popover" class="popover" popover data-side="below" data-anchor="hud-toolbar" aria-label="Teleport the active player">
     <div class="pop-title">Teleport to</div>
-    <button id="tp-empire" class="pop-item tp-btn" data-teleport="empire" type="button"><span class="pop-name">Empire State Building</span><span class="pop-sub">5th Ave · Midtown</span></button>
-    <button id="tp-timessq" class="pop-item tp-btn" data-teleport="timessq" type="button"><span class="pop-name">Times Square</span><span class="pop-sub">7th Ave · Theater District</span></button>
-    <button id="tp-chrysler" class="pop-item tp-btn" data-teleport="chrysler" type="button"><span class="pop-name">Chrysler Building</span><span class="pop-sub">Lexington Ave · Midtown East</span></button>
-    <button id="tp-grandcentral" class="pop-item tp-btn" data-teleport="grandcentral" type="button"><span class="pop-name">Grand Central Terminal</span><span class="pop-sub">Park Ave · Midtown East</span></button>
-    <button id="tp-bryant" class="pop-item tp-btn" data-teleport="bryant" type="button"><span class="pop-name">Bryant Park</span><span class="pop-sub">6th Ave · Midtown</span></button>
-    <button id="tp-flatiron" class="pop-item tp-btn" data-teleport="flatiron" type="button"><span class="pop-name">Flatiron Building</span><span class="pop-sub">5th Ave · Flatiron District</span></button>
-    <button id="tp-centralpark" class="pop-item tp-btn" data-teleport="centralpark" type="button"><span class="pop-name">Central Park</span><span class="pop-sub">6th Ave · Central Park South</span></button>
-    <button id="tp-owtc" class="pop-item tp-btn" data-teleport="owtc" type="button"><span class="pop-name">One World Trade Center</span><span class="pop-sub">Vesey St · Financial District</span></button>
+    <button id="tp-empire" class="pop-item tp-btn" data-teleport="empire" type="button"><span class="pop-name">Pedder Street · CBD</span><span class="pop-sub">Des Voeux Rd Central</span></button>
+    <button id="tp-timessq" class="pop-item tp-btn" data-teleport="timessq" type="button"><span class="pop-name">Ice House Street</span><span class="pop-sub">towards IFC / harbour</span></button>
+    <button id="tp-chrysler" class="pop-item tp-btn" data-teleport="chrysler" type="button"><span class="pop-name">Bank of China Tower</span><span class="pop-sub">Garden Rd · Admiralty</span></button>
+    <button id="tp-grandcentral" class="pop-item tp-btn" data-teleport="grandcentral" type="button"><span class="pop-name">Exchange Square</span><span class="pop-sub">IFC podium · Central</span></button>
+    <button id="tp-bryant" class="pop-item tp-btn" data-teleport="bryant" type="button"><span class="pop-name">Statue Square</span><span class="pop-sub">Chater Rd · Central</span></button>
+    <button id="tp-flatiron" class="pop-item tp-btn" data-teleport="flatiron" type="button"><span class="pop-name">Jardine House</span><span class="pop-sub">Connaught Rd · harbourfront</span></button>
+    <button id="tp-centralpark" class="pop-item tp-btn" data-teleport="centralpark" type="button"><span class="pop-name">Hong Kong Park</span><span class="pop-sub">Cotton Tree Drive</span></button>
+    <button id="tp-owtc" class="pop-item tp-btn" data-teleport="owtc" type="button"><span class="pop-name">Two IFC</span><span class="pop-sub">harbour promenade · Central</span></button>
   </div>
 
   <!-- Bottom-Left: Street-Name Signs & Live GPS Radar Minimap -->
   <div class="hud hud-bottom-left">
     <div id="hud-location" class="location" aria-live="off"></div>
-    <aside id="minimap-card" class="panel radar" aria-label="Live NYC Street Radar Minimap" title="Open the full New York City street map [M]">
+    <aside id="minimap-card" class="panel radar" aria-label="Live Hong Kong Central Street Radar Minimap" title="Open the full Hong Kong Central street map [M]">
       <canvas id="minimap-canvas"></canvas>
       <span class="radar-north" aria-hidden="true">N</span>
       <kbd class="radar-key">M</kbd>
@@ -253,7 +253,7 @@
 
     <div class="fullmap-header">
       <div class="panel fullmap-title">
-        <span class="mta-bullet" aria-hidden="true">NY</span>
+        <span class="mta-bullet" aria-hidden="true">HK</span>
         <div>
           <h2>Manhattan Street Atlas</h2>
           <p id="fullmap-player-info" class="fullmap-subtitle">You are at 5th Ave &amp; 35th St</p>
