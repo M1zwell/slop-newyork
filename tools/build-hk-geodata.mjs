@@ -7,6 +7,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildHkBlocks } from './geo-blocks-hk.mjs';
 
 const DATA = process.env.GEO_DATA || fileURLToPath(new URL('data-hk/', import.meta.url));
 const OUT = process.argv[2] || fileURLToPath(new URL('../js/nyc-geodata.js', import.meta.url));
@@ -200,7 +201,7 @@ function closeShoreAsIsland(shore, inlandSouth = 900) {
   // Sort roughly west→east along the harbour edge (prefer northernmost points as waterfront)
   // Use convex-ish: take northern envelope then close south
   const byX = pts.slice().sort((a, b) => a[0] - b[0]);
-  const step = Math.max(1, Math.floor(byX.length / 120));
+  const step = Math.max(1, Math.floor(byX.length / 400));
   const north = [];
   for (let i = 0; i < byX.length; i += step) {
     // among nearby x, pick min z (north)
@@ -216,12 +217,12 @@ function closeShoreAsIsland(shore, inlandSouth = 900) {
   const east = north[north.length - 1];
   const southZ = Math.max(...north.map((p) => p[1])) + inlandSouth;
   const ring = [...north, [east[0], southZ], [west[0], southZ]];
-  const simp = rdpRing(ring, 3);
+  const simp = rdpRing(ring, 1.5);
   if (ringArea(simp) > 0) simp.reverse(); // CCW land-positive convention used elsewhere expects negative area sometimes; keep consistent with NYC (negative = CW)
   return simp;
 }
 
-const hkIsland = closeShoreAsIsland(mainShore, 1000);
+const hkIsland = closeShoreAsIsland(mainShore, 1400);
 log(`HK Island detail ring: ${hkIsland.length} pts area=${(Math.abs(ringArea(hkIsland)) / 1e6).toFixed(3)} km²`);
 
 // Kowloon opposite shore: chains with centroid north of harbour (z < -200)
@@ -395,8 +396,27 @@ let broadway = [];
   else broadway = [[0, -300], [0, 500]];
 }
 
-// Road graph (minimal)
-const rgNodes = [];
+// Road graph — weld intersections (NYC geo-roadgraph MERGE≈1 m; HK OSM ends need a looser snap)
+const MERGE = 10; // metres: piece ends / vertices this close share a node
+const rgNodes = []; // [[x,z], ...] before flatten
+const cells = new Map();
+const cellKey = (ix, iz) => ix * 100003 + iz;
+function nodeAt(x, z) {
+  const ix = Math.floor(x / MERGE), iz = Math.floor(z / MERGE);
+  for (let dx = -1; dx <= 1; dx++) {
+    for (let dz = -1; dz <= 1; dz++) {
+      for (const id of cells.get(cellKey(ix + dx, iz + dz)) || []) {
+        if (Math.hypot(rgNodes[id][0] - x, rgNodes[id][1] - z) <= MERGE) return id;
+      }
+    }
+  }
+  const id = rgNodes.length;
+  rgNodes.push([x, z]);
+  const k = cellKey(ix, iz);
+  if (!cells.has(k)) cells.set(k, []);
+  cells.get(k).push(id);
+  return id;
+}
 const rgLinks = [];
 const rgNames = [];
 const nameIdx = new Map();
@@ -406,17 +426,38 @@ function ensureName(n) {
 }
 for (const r of roadLines) {
   if (r.pts.length < 2 || r.w < 6) continue;
-  const ni = [];
-  for (const [x, z] of r.pts) {
-    ni.push(rgNodes.length / 2);
-    rgNodes.push(q(x), q(z));
-  }
   const nm = ensureName(r.name);
-  for (let i = 0; i + 1 < ni.length; i++) {
-    rgLinks.push([ni[i], ni[i + 1], nm, q(r.w), r.lanes, r.dir === 'TW' ? 0 : 1, []]);
+  // direction: TW=0 both, FT=1 along polyline, TF=-1 reverse (match NYC geo-roadgraph)
+  const dir = r.dir === 'TW' ? 0 : r.dir === 'TF' ? -1 : 1;
+  // Snap every vertex so mid-block T-junctions that land near a centreline weld too
+  const ids = r.pts.map(([x, z]) => nodeAt(x, z));
+  for (let i = 0; i + 1 < ids.length; i++) {
+    const a = ids[i], b = ids[i + 1];
+    if (a === b) continue;
+    const inner = [];
+    // keep a light mid-shape if segment is long
+    const [x0, z0] = r.pts[i], [x1, z1] = r.pts[i + 1];
+    if (Math.hypot(x1 - x0, z1 - z0) > 40) {
+      inner.push(q((x0 + x1) / 2), q((z0 + z1) / 2));
+    }
+    rgLinks.push([a, b, nm, q(r.w), r.lanes, dir, inner]);
   }
 }
-const roadGraph = { nodes: rgNodes, links: rgLinks, names: rgNames };
+// Compact to used nodes only
+{
+  const used = new Map();
+  const outNodes = [];
+  const idOf = (i) => {
+    if (!used.has(i)) {
+      used.set(i, outNodes.length / 2);
+      outNodes.push(q(rgNodes[i][0]), q(rgNodes[i][1]));
+    }
+    return used.get(i);
+  };
+  const outLinks = rgLinks.map(([a, b, n, w, lanes, dir, inner]) => [idOf(a), idOf(b), n, w, lanes, dir, inner]);
+  var roadGraph = { nodes: outNodes, links: outLinks, names: rgNames };
+  log(`road graph welded @${MERGE}m: ${outNodes.length / 2} nodes, ${outLinks.length} links (from ${rgNodes.length} raw)`);
+}
 
 // =====================================================================================================================
 // PARKS / LANDMARKS / PIERS
@@ -581,8 +622,58 @@ const CUT_Z = q(Math.min(...hkIsland.map((p) => p[1])) - 100);
 const STRIP = 20;
 const SIDEWALK = 4.0;
 
-// Minimal blocks: empty — city-grid will rely more on roads; empty is safer than bad footprints
-const blocks = [];
+// Augment OSM roads with synthesized E–W / N–S separators so oversized Mid-Levels
+// blobs (sparse OSM) still split into curb-scale islands. Separators inherit HK
+// street/avenue positions — not NYC Midtown geometry.
+const sepRoads = [];
+{
+  const bb = bbox(hkIsland);
+  for (const s of streetsOut) {
+    const z = s.z;
+    if (z < bb.z0 - 20 || z > bb.z1 + 20) continue;
+    const w = (s.segs && s.segs[0] && s.segs[0][3]) || 10;
+    sepRoads.push({
+      name: `SYN_ST_${s.n}`,
+      w: Math.max(8, w * 0.85),
+      dir: 'TW', lanes: 2, hw: 0,
+      pts: [[bb.x0 - 20, z], [bb.x1 + 20, z]]
+    });
+  }
+  for (const a of avenuesOut) {
+    const x = a.x;
+    if (x < bb.x0 - 20 || x > bb.x1 + 20) continue;
+    const seg = a.segs && a.segs[0];
+    const w = (seg && seg.w) || 12;
+    const z0 = (seg && seg.z0) || bb.z0;
+    const z1 = (seg && seg.z1) || bb.z1;
+    sepRoads.push({
+      name: `SYN_AVE_${a.id}`,
+      w: Math.max(8, w * 0.85),
+      dir: 'TW', lanes: 2, hw: 0,
+      pts: [[x, Math.min(z0, bb.z0) - 20], [x, Math.max(z1, bb.z1) + 20]]
+    });
+  }
+  log(`separator stamps: ${sepRoads.length} synth street/ave lines`);
+}
+const blockRoadLines = roadLines.concat(sepRoads);
+
+// Curb islands from OSM centreline + HK Island land ring (geo-blocks-hk.mjs)
+const { blocks: rawBlocks } = buildHkBlocks({
+  landRing: hkIsland,
+  roadLines: blockRoadLines,
+  strip: STRIP,
+  sidewalk: SIDEWALK,
+  log: (...a) => log(...a)
+});
+const blocks = rawBlocks.map((b) => [
+  flat(b.poly),
+  b.rects.map((r) => r.map(q)),
+  b.park || 0,
+  b.parkName || '',
+  b.rect ? 1 : 0,
+  0 // frames: null — HK lots are axis-aligned for v2; irregular frontage frames later
+]);
+log(`blocks baked: ${blocks.length}`);
 
 const GEO = {
   version: 1,
@@ -617,7 +708,7 @@ const GEO = {
 };
 
 const json = JSON.stringify(GEO);
-const header = `// js/nyc-geodata.js — GENERATED by tools/build-hk-geodata.mjs (Hong Kong Central v1), do not edit by hand.
+const header = `// js/nyc-geodata.js — GENERATED by tools/build-hk-geodata.mjs (Hong Kong Central v2 — curb blocks + welded roadGraph), do not edit by hand.
 // World frame: 1 unit = 1 m, x = east, z = south (north = -z), origin at Pedder St × Des Voeux Rd Central, bearing ${GEO.frame.bearingDeg}°.
 // Schema keys retain NYC names (manhattan, centralPark, …) for runtime compatibility; values are Hong Kong.
 // Geographic data © OpenStreetMap contributors (https://www.openstreetmap.org/copyright) — ODbL.

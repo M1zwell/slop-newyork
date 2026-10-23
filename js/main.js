@@ -87,13 +87,27 @@ async function initApp() {
   markInit('streetDetails');
   // Buildings turned along non-grid streets have oriented colliders whose world bounds reach past their lots: they stay
   // inside the property line anyway, so the road network (lanes & sidewalks) doesn't need them
-  const trafficSystem = createTrafficSystem(scene, cityGrid.sidewalks, [
-    ...cityGrid.footprints,
-    ...streetDetails.footprints,
-    ...allColliders.filter((c) => !c.obb)
-  ]);
+  let trafficSystem;
+  try {
+    trafficSystem = createTrafficSystem(scene, cityGrid.sidewalks, [
+      ...cityGrid.footprints,
+      ...streetDetails.footprints,
+      ...allColliders.filter((c) => !c.obb)
+    ]);
+  } catch (err) {
+    console.warn('[init] createTrafficSystem failed; continuing without street traffic', err);
+    trafficSystem = {
+      group: new THREE.Group(),
+      update() {},
+      cars: [],
+      buses: [],
+      peds: [],
+      network: { nodes: [], edges: [], connector() { return null; }, curvePoint() {}, walkable: () => false, onSidewalk: () => false }
+    };
+    scene.add(trafficSystem.group);
+  }
   markInit('traffic');
-  const highwayTraffic = createHighwayTraffic(scene, cityGrid.highwayLanes);
+  const highwayTraffic = createHighwayTraffic(scene, cityGrid.highwayLanes || []);
   buildRoadPaint(scene, trafficSystem.network);
   markInit('roadPaint');
 

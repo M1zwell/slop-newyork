@@ -85,8 +85,48 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
   // =========================================================================
   // 0. ROAD NETWORK
   // =========================================================================
-  const network = buildRoadNetwork(sidewalks, obstacles);
+  let network;
+  try {
+    network = buildRoadNetwork(sidewalks, obstacles);
+  } catch (err) {
+    console.warn('[traffic] buildRoadNetwork failed; skipping traffic', err);
+    scene.add(group);
+    return {
+      group,
+      update() {},
+      cars: [],
+      buses: [],
+      peds: [],
+      network: {
+        nodes: [],
+        edges: [],
+        connector() { return null; },
+        curvePoint() {},
+        walkable: () => false,
+        onSidewalk: () => false
+      }
+    };
+  }
   const { nodes, edges, connector, curvePoint, walkable, onSidewalk } = network;
+  if (!edges.length) {
+    console.warn('[traffic] road network has no edges; skipping traffic');
+    scene.add(group);
+    return {
+      group,
+      update() {},
+      cars: [],
+      buses: [],
+      peds: [],
+      network: {
+        nodes: [],
+        edges: [],
+        connector() { return null; },
+        curvePoint() {},
+        walkable: () => false,
+        onSidewalk: () => false
+      }
+    };
+  }
 
   // Sides of an intersection (road-network.js step 9): a grid intersection's are 0 east, 1 west, 2 south, 3 north;
   // centreline junctions number their arms from 4. Where lane i of edge e meets a crosswalk, measured along the
@@ -94,10 +134,14 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
   const laneCoord = (e, i) => (e.sx + e.rx * e.lanes[i]) * e.clx + (e.sz + e.rz * e.lanes[i]) * e.clz;
 
   for (const n of nodes) {
-    n.box = new Array(n.groupCount).fill(0); // vehicles crossing it from each road (group: on the grid avenue 0, street 1)
-    n.crossing = new Array(n.sideCount).fill(0); // vehicles crossing (or about to cross) the crosswalk on each side
-    n.approach = new Array(n.sideCount).fill(null); // the edge arriving over each side's crosswalk
-    n.road = new Array(n.sideCount).fill(null); // an edge arriving or leaving over each side's crosswalk: the road it spans
+    const groupCount = Math.max(2, n.groupCount || 2);
+    const sideCount = Math.max(4, n.sideCount || 4);
+    n.groupCount = groupCount;
+    n.sideCount = sideCount;
+    n.box = new Array(groupCount).fill(0); // vehicles crossing it from each road (group: on the grid avenue 0, street 1)
+    n.crossing = new Array(sideCount).fill(0); // vehicles crossing (or about to cross) the crosswalk on each side
+    n.approach = new Array(sideCount).fill(null); // the edge arriving over each side's crosswalk
+    n.road = new Array(sideCount).fill(null); // an edge arriving or leaving over each side's crosswalk: the road it spans
     n.walkers = []; // pedestrians on its crosswalks
     n.curb = []; // pedestrians at the curbs of its crosswalks, standing or about to (who to queue behind)
   }
@@ -105,8 +149,17 @@ function createTrafficSystem(scene, sidewalks, obstacles) {
     e.occ = e.lanes.map(() => []); // vehicles in each lane, sorted by position
     // e.inSide / e.outSide: the crosswalks crossed on the way into e.to / out of e.from; e.axisIndex: its group at e.to;
     // e.opposite: the oncoming edge of its road there (road-network.js)
-    e.to.approach[e.inSide] = e;
-    e.to.road[e.inSide] = e.from.road[e.outSide] = e;
+    if (e.to?.approach && e.inSide != null && e.inSide >= 0 && e.inSide < e.to.approach.length) {
+      e.to.approach[e.inSide] = e;
+    }
+    if (
+      e.to?.road && e.from?.road &&
+      e.inSide != null && e.outSide != null &&
+      e.inSide >= 0 && e.outSide >= 0 &&
+      e.inSide < e.to.road.length && e.outSide < e.from.road.length
+    ) {
+      e.to.road[e.inSide] = e.from.road[e.outSide] = e;
+    }
     e.through = 0; // vehicles from e crossing e.to straight on or to the right
     e.lefts = 0; // and to the left
     e.mx = e.sx + e.dx * e.len * 0.5;
