@@ -33,8 +33,12 @@ import {
   streetZ,
   avenueX,
   getBroadwayX,
-  EAST_RIVER_BRIDGES
+  EAST_RIVER_BRIDGES,
+  IS_HONGKONG,
+  HK_DISTRICT_PROFILE_ALIAS
 } from './city-config.js';
+import { HK_HEIGHT_TABLES } from './hk-height-tables.js';
+import { resolveLotFloors, lookupMeasuredHeight } from './hk-measured-height.js';
 import {
   createPreWarBuildingMaterial,
   createCurtainWallMaterial,
@@ -266,7 +270,7 @@ function buildCityBlocks(scene) {
   // out along the streets they front, in a frame turned by θ about p); the generator works in the frame as on a grid
   // block, and everything it emits is turned into place (placeInFrame), so buildings line up with their street.
   let xf = null; // { th, cs, sn, px, pz }
-  let minLot = 15; // smallest lot side built on (frontage frames come in lots of 12 m and up, see geo-blocks.mjs)
+  let minLot = IS_HONGKONG ? 11 : 15; // smallest lot side built on (frontage frames come in lots of 12 m and up, see geo-blocks.mjs)
   const toWorld = (x, z) => (xf
     ? [xf.px + (x - xf.px) * xf.cs + (z - xf.pz) * xf.sn, xf.pz - (x - xf.px) * xf.sn + (z - xf.pz) * xf.cs]
     : [x, z]);
@@ -403,7 +407,9 @@ function buildCityBlocks(scene) {
       xAt: (z) => ax + ((z - az) / (bz - az)) * (bx - ax)
     };
   })();
-  const inBowtie = (x, z) => !!TS && z > TS.zN && z < TS.zS && (Math.abs(x - TS.xAt(z)) < TS.halfB || Math.abs(x - TS.x7) < TS.half7);
+  if (IS_HONGKONG) { /* Times Square bowtie is NYC-only */ }
+  const TS_EFF = IS_HONGKONG ? null : TS;
+  const inBowtie = (x, z) => !!TS_EFF && z > TS_EFF.zN && z < TS_EFF.zS && (Math.abs(x - TS_EFF.xAt(z)) < TS_EFF.halfB || Math.abs(x - TS_EFF.x7) < TS_EFF.half7);
   // Does the lot edge at x (dir -1: its west edge, +1: its east edge; in the current frame) look across the sidewalk
   // onto the bowtie?
   const frontsBowtie = (x, dir, z0, z1) => [0.25, 0.5, 0.75].some((f) => [6, 12, 20].some((t) => inBowtie(...toWorld(x + dir * t, z0 + (z1 - z0) * f))));
@@ -904,9 +910,12 @@ function buildCityBlocks(scene) {
         if (b - x - w < kind.w[0] * 0.6) w = b - x;
         const lot = side === 'n' ? rect(x, x + w, blk.minZ, blk.minZ + halfD) : rect(x, x + w, blk.maxZ - halfD, blk.maxZ);
         if (kind.build) {
+          const floors = IS_HONGKONG
+            ? Math.max(1, floorsForLot(lot, fl, 3.2))
+            : Math.max(1, floorsRun + (chance(0.2) ? pick([-1, 1]) : 0));
           kind.build(blk, lot, side, {
             mat,
-            floors: Math.max(1, floorsRun + (chance(0.2) ? pick([-1, 1]) : 0)),
+            floors,
             depth: Math.min(halfD, depthRun * range(0.95, 1.05))
           });
         }
@@ -1310,13 +1319,18 @@ function buildCityBlocks(scene) {
 
   // Office-block filler: older loft / office buildings (light wells on deep lots, 1916 setbacks when tall), modern
   // glass mid-rises, the odd low holdout
+  function floorsForLot(lot, fallbackRange, floorM = 3.5) {
+    if (!IS_HONGKONG) return irange(fallbackRange[0], fallbackRange[1]);
+    return resolveLotFloors(lot, fallbackRange, irange, floorM);
+  }
+
   function midrise(blk, lot, cfg) {
     const mat = pickW(cfg.fillMats);
     const glass = mat >= 3;
     const b = building(blk, mat, lot);
     const W = rectW(lot);
     const D = rectD(lot);
-    const f = chance(0.15) ? irange(2, 5) : irange(cfg.fillFloors[0], cfg.fillFloors[1]);
+    const f = chance(0.15) ? irange(2, 5) : floorsForLot(lot, cfg.fillFloors, glass ? 3.8 : 3.5);
     const holes = [];
     if (!glass && D > 18 && W > 11 && chance(0.5)) {
       const walls = ['w', 'e'].filter((s) => !b.street[s]);
@@ -1765,9 +1779,90 @@ function buildCityBlocks(scene) {
     });
   }
 
+  // PR-H H1: floor ranges from offline Planet+GEO bake; P0 prefers CSDI measured via floorsForLot.
+  const _hkH = HK_HEIGHT_TABLES;
+  const OFFICE_CENTRAL_HK = {
+    ...OFFICE_MIDTOWN,
+    plans: [['pair', 3], ['major', 4], ['full', 2.5], ['plaza', 1]],
+    styles: [['glass', 7], ['deco', 1.5], ['slab', 0.5]],
+    towerFloors: _hkH.OFFICE_CENTRAL_HK.towerFloors,
+    glassMats: [[5, 4], [3, 3], [4, 2]],
+    decoMats: [[0, 5], [1, 2]],
+    fillMats: [[0, 4], [3, 2], [1, 1]],
+    fillFloors: _hkH.OFFICE_CENTRAL_HK.fillFloors,
+    shaftShapes: [['rect', 2], ['notched', 3], ['stepped', 2], ['L', 1]]
+  };
+  const OFFICE_ADMIRALTY_HK = {
+    ...OFFICE_MIDTOWN,
+    plans: [['pair', 4], ['major', 3], ['plaza', 2], ['full', 1]],
+    styles: [['glass', 5], ['deco', 2], ['slab', 1]],
+    towerFloors: _hkH.OFFICE_ADMIRALTY_HK.towerFloors,
+    glassMats: [[3, 4], [4, 3], [5, 1]],
+    fillMats: [[0, 4], [1, 2], [3, 1]],
+    fillFloors: _hkH.OFFICE_ADMIRALTY_HK.fillFloors
+  };
+  const OFFICE_WAN_CHAI_HK = {
+    ...OFFICE_MIDTOWN,
+    plans: [['pair', 3], ['major', 3], ['full', 1.5], ['plaza', 1.5]],
+    styles: [['glass', 4], ['deco', 2], ['slab', 1.5]],
+    towerFloors: _hkH.OFFICE_WAN_CHAI_HK.towerFloors,
+    glassMats: [[3, 3], [4, 3], [5, 1]],
+    fillMats: [[0, 3], [1, 3], [2, 2]],
+    fillFloors: _hkH.OFFICE_WAN_CHAI_HK.fillFloors
+  };
+  const OFFICE_CAUSEWAY_HK = {
+    ...OFFICE_MIDTOWN,
+    plans: [['major', 5], ['pair', 4.5], ['full', 2], ['plaza', 0.8]],
+    styles: [['glass', 5], ['slab', 2.5], ['deco', 1]],
+    towerFloors: _hkH.OFFICE_CAUSEWAY_HK.towerFloors,
+    glassMats: [[3, 3], [4, 4], [5, 2]],
+    fillMats: [[0, 3], [1, 3], [2, 3]],
+    fillFloors: _hkH.OFFICE_CAUSEWAY_HK.fillFloors
+  };
+  const RES_SHEUNG_WAN_HK = res({
+    ends: bothEnds([['walkups', 5], ['prewar', 2], ['tower', 1], ['none', 0.5]]),
+    walkup: _hkH.RES_SHEUNG_WAN_HK.walkup,
+    prewar: _hkH.RES_SHEUNG_WAN_HK.prewar,
+    tower: _hkH.RES_SHEUNG_WAN_HK.tower,
+    walkupMats: [[1, 6], [2, 4], [0, 1]],
+    prewarMats: [[1, 5], [2, 3], [0, 2]],
+    towerMats: [[2, 4], [1, 3], [0, 1]],
+    rows: [['tenement', 5], ['brownstone', 2], ['rowhouse', 1.5], ['midApt', 2], ['low', 0.8]],
+    through: 0.12
+  });
+  const RES_MID_LEVELS_HK = res({
+    ends: bothEnds([['walkups', 5], ['prewar', 3.5], ['tower', 1.2], ['none', 0.2]]),
+    walkup: _hkH.RES_MID_LEVELS_HK.walkup,
+    prewar: _hkH.RES_MID_LEVELS_HK.prewar,
+    tower: _hkH.RES_MID_LEVELS_HK.tower,
+    walkupMats: [[1, 5], [2, 5], [0, 1]],
+    prewarMats: [[2, 5], [1, 4], [0, 1]],
+    towerMats: [[2, 4], [1, 2], [0, 1]],
+    rows: [['tenement', 4], ['brownstone', 3], ['midApt', 3.5], ['rowhouse', 2], ['garden', 0.25]],
+    through: 0.07
+  });
+  const RES_WAN_CHAI_MIX_HK = res({
+    ends: bothEnds([['walkups', 3], ['prewar', 2], ['tower', 2], ['glass', 1]]),
+    walkup: _hkH.RES_WAN_CHAI_MIX_HK.walkup,
+    prewar: _hkH.RES_WAN_CHAI_MIX_HK.prewar,
+    tower: _hkH.RES_WAN_CHAI_MIX_HK.tower,
+    walkupMats: [[1, 3], [2, 3], [0, 2], [4, 1]],
+    prewarMats: [[0, 3], [2, 3], [1, 2], [3, 1]],
+    towerMats: [[4, 3], [3, 2], [2, 2], [0, 1]],
+    rows: [['tenement', 4], ['midApt', 3], ['brownstone', 2], ['postwarApt', 1.5], ['low', 0.5]],
+    through: 0.15
+  });
+
   // Profile of a block by its real neighbourhood (city-config.js districtAt)
   function blockProfile(blk, district) {
-    switch (district) {
+    const resolved = (IS_HONGKONG && HK_DISTRICT_PROFILE_ALIAS[district]) || district;
+    switch (resolved) {
+      case 'hk_central': return OFFICE_CENTRAL_HK;
+      case 'hk_admiralty': return OFFICE_ADMIRALTY_HK;
+      case 'hk_wan_chai': return chance(0.62) ? OFFICE_WAN_CHAI_HK : RES_WAN_CHAI_MIX_HK;
+      case 'hk_causeway': return OFFICE_CAUSEWAY_HK;
+      case 'hk_sheung_wan': return RES_SHEUNG_WAN_HK;
+      case 'hk_mid_levels': return RES_MID_LEVELS_HK;
       case 'riverfront': return RIVERFRONT;
       case 'hudson_yards': return OFFICE_HUDSON_YARDS;
       case 'billionaires_row': return chance(0.6) ? OFFICE_BILLIONAIRES : OFFICE_MIDTOWN;

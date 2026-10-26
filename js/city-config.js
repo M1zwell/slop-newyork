@@ -1,4 +1,9 @@
 import { GEO } from './nyc-geodata.js';
+import { HK_ROAD_LAYERS } from './hk-road-layers-data.js';
+
+// City id from the baked GEO frame (hongkong | nyc). HK Central uses Pedder×Des Voeux origin.
+const CITY_ID = (GEO.frame && GEO.frame.city) || 'nyc';
+const IS_HONGKONG = CITY_ID === 'hongkong';
 
 // js/city-config.js
 // Hong Kong Central / Victoria Harbour spatial configuration at true 1:1 scale, derived from js/nyc-geodata.js
@@ -89,12 +94,17 @@ const ALL_AVENUES = GEO.avenues.map((a) => {
   };
 });
 // The shore highways (drawn following the shoreline by the maps; built by city-grid.js's waterfront edge)
-ALL_AVENUES.push(
-  { id: 'westside', x: -2000, name: '12th Ave / West Side Hwy (NY 9A)', short: 'West Side Hwy', dir: 0, width: 28, isHighway: true, minZ: CUT_Z, maxZ: 6200, followsShore: 'west' },
-  { id: 'fdr', x: 1500, name: 'FDR Drive', short: 'FDR Dr', dir: 0, width: 26, isHighway: true, minZ: CUT_Z, maxZ: 6400, followsShore: 'east' }
-);
+if (!IS_HONGKONG) {
+  ALL_AVENUES.push(
+    { id: 'westside', x: -2000, name: '12th Ave / West Side Hwy (NY 9A)', short: 'West Side Hwy', dir: 0, width: 28, isHighway: true, minZ: CUT_Z, maxZ: 6200, followsShore: 'west' },
+    { id: 'fdr', x: 1500, name: 'FDR Drive', short: 'FDR Dr', dir: 0, width: 26, isHighway: true, minZ: CUT_Z, maxZ: 6400, followsShore: 'east' }
+  );
+}
 const AVENUE_BY_ID = new Map(ALL_AVENUES.map((a) => [a.id, a]));
-const avenueX = (id) => AVENUE_BY_ID.get(String(id)).x;
+const avenueX = (id) => {
+  const a = AVENUE_BY_ID.get(String(id));
+  return a ? a.x : 0;
+};
 // The avenue's name at a given z (8th Ave below 59th St, Central Park West to 110th St, Frederick Douglass Blvd above)
 function avenueNameAt(ave, z) {
   if (!ave.segs) return ave.short;
@@ -403,7 +413,56 @@ for (const s of GEO.streets) {
 ALL_STREETS.sort((a, b) => a.z - b.z);
 
 // Named roads (the real centreline, merged per street) — maps, labels & lookups
-const ROADS = GEO.roads.map(([name, w, dir, lanes, hw, flat]) => ({ name: prettyName(name), raw: name, w, dir, lanes, highway: !!hw, pts: toPts(flat) }));
+const _roadLayerGrid = (() => {
+  const CELL = 64;
+  const g = new Map();
+  for (const row of HK_ROAD_LAYERS || []) {
+    if (!Number.isFinite(row.x) || !Number.isFinite(row.z)) continue;
+    const k = `${Math.floor(row.x / CELL)},${Math.floor(row.z / CELL)}`;
+    if (!g.has(k)) g.set(k, []);
+    g.get(k).push(row);
+  }
+  return { CELL, g };
+})();
+function _stampRoadLayer(name, midX, midZ) {
+  const { CELL, g } = _roadLayerGrid;
+  const kx = Math.floor(midX / CELL);
+  const kz = Math.floor(midZ / CELL);
+  let best = null;
+  let bestD = 45;
+  const want = String(name || '').toUpperCase();
+  for (let dx = -1; dx <= 1; dx++) {
+    for (let dz = -1; dz <= 1; dz++) {
+      for (const row of g.get(`${kx + dx},${kz + dz}`) || []) {
+        const d = Math.hypot(row.x - midX, row.z - midZ);
+        if (d > bestD) continue;
+        // Prefer same-name hits within radius, else nearest tagged way
+        const nameHit = want && row.name && row.name.includes(want.slice(0, Math.min(12, want.length)));
+        const score = d - (nameHit ? 20 : 0);
+        if (!best || score < best.score) best = { row, score, d };
+      }
+    }
+  }
+  return best ? best.row : null;
+}
+const ROADS = GEO.roads.map(([name, w, dir, lanes, hw, flat]) => {
+  const pts = toPts(flat);
+  const mid = pts[Math.floor(pts.length / 2)] || { x: 0, z: 0 };
+  const hit = _stampRoadLayer(name, mid.x, mid.z);
+  return {
+    name: prettyName(name),
+    raw: name,
+    w,
+    dir, // GEO string dir (FT/TW/TF) — do not overwrite with numeric oneway
+    lanes: (hit && hit.lanes) || lanes,
+    highway: !!hw,
+    pts,
+    layer: hit && hit.l ? hit.l : 0,
+    bridge: !!(hit && hit.b),
+    tunnel: !!(hit && hit.t),
+    oneway: hit && hit.o ? hit.o : 0
+  };
+});
 const LOWER_MANHATTAN_NAMES = [
   ['E  HOUSTON ST', 'Houston St (SoHo / East Village)', 'Houston St', true], ['BLEECKER ST', 'Bleecker St (Greenwich Village)', 'Bleecker St'],
   ['PRINCE ST', 'Prince St (SoHo)', 'Prince St'], ['SPRING ST', 'Spring St (SoHo)', 'Spring St'], ['DELANCEY ST', 'Delancey St (Williamsburg Br)', 'Delancey St', true],
@@ -538,9 +597,28 @@ const XA = (id) => avenueX(id);
 const HOUSTON_Z = 3376; // at Broadway
 const CANAL_Z = 4169;
 const CHAMBERS_Z = 4859;
+const HK_DISTRICT_PROFILE_ALIAS = {
+  central: 'hk_central',
+  admiralty: 'hk_admiralty',
+  wan_chai: 'hk_wan_chai',
+  causeway_bay: 'hk_causeway',
+  sheung_wan: 'hk_sheung_wan',
+  mid_levels: 'hk_mid_levels',
+  the_peak: 'hk_mid_levels',
+  central_park: 'hk_central'
+};
 function districtAt(x, z) {
   const cp = CENTRAL_PARK_BOUNDS;
-  if (x > cp.minX && x < cp.maxX && z > cp.minZ && z < cp.maxZ) return 'central_park';
+  if (x > cp.minX && x < cp.maxX && z > cp.minZ && z < cp.maxZ) return IS_HONGKONG ? 'central_park' : 'central_park';
+  // HK GEO has a trimmed avenue set — NYC Harlem/Midtown branching would throw via avenueX.
+  if (IS_HONGKONG) {
+    if (x > 2350) return 'causeway_bay';
+    if (x > 1200) return 'wan_chai';
+    if (x > 550) return 'admiralty';
+    if (z > 200 || (z > 100 && x < -300)) return 'mid_levels';
+    if (x < -400) return 'sheung_wan';
+    return 'central';
+  }
   if (z < Z(110)) {
     if (x < XA('manhattan') - 30) return 'morningside';
     if (x > XA('5') + 10) return 'east_harlem';
@@ -763,6 +841,9 @@ function walkSignal(time, isAvenue) {
 }
 
 export {
+  IS_HONGKONG,
+  CITY_ID,
+  HK_DISTRICT_PROFILE_ALIAS,
   AVENUES,
   ALL_AVENUES,
   CENTRAL_PARK_BOUNDS,
