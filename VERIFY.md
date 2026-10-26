@@ -2,6 +2,8 @@
 
 **Branch:** `feat/slop-hk-tw-height-join`  
 **Base:** `feat/slop-hongkong-central` @ `c097ec848abc0007138fcb384411341c3980ab36`  
+**Commit:** `7b3abe6866b74848bf7bb5366c89cb1a50e30f0c`  
+**PR:** https://github.com/M1zwell/slop-newyork/pull/2  
 **Date:** 2026-10-26 (Asia/Hong_Kong)  
 **Repo:** `/workspace/m1zwell-slop-newyork` (local; CloudAgent blocked — usage exhausted)
 
@@ -105,4 +107,4 @@ No Tiny Warsaw vendoring · no Open3Dhk meshes · no client LandsD keys · no li
 - [x] P1 layer/bridge/oneway stamped; dir strings preserved
 - [x] Recipe rise ±0.5 m unit-tested
 - [x] Unit tests green (11 + 4)
-- [ ] PR opened (pending auth)
+- [x] PR opened: https://github.com/M1zwell/slop-newyork/pull/2
