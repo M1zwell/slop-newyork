@@ -1,0 +1,25 @@
+Slop Hong Kong — static mount lineage for https://gghere.com/slop/hongkong
+
+Upstream style: mrdoob/slop-newyork (three.js WebGPU + TSL)
+Fork / geodata branch: M1zwell/slop-newyork @ feat/slop-hongkong-central
+Commit base: c097ec848abc0007138fcb384411341c3980ab36
+
+Quality parity: curb-island GEO.blocks + welded roadGraph (SCC).
+Pedder ENU origin (LAT0 22.28155, LON0 114.15785); x=east, z=south.
+
+## Attribution
+
+- OpenStreetMap contributors (ODbL) — road centre-lines, blocks, parks, piers, landmarks
+  via tools/data-hk Overpass extracts + tools/build-hk-geodata.mjs
+- Lands Department / CSDI Building FeatureServer (landsd_rcd_1637211194312_35158)
+  — measured building heights as TopHeight − BaseHeight (Storeys×3.2 fallback),
+  baked offline by tools/bake-hk-slop-heights.mjs → data/hk-lot-heights.json.gz
+  (browser loads same-origin js/hk-lot-heights-data.js only; no client LandsD key /
+  no live CSDI in the browser)
+- OSM lanes / layer / bridge / tunnel / oneway — tools/bake-hk-road-layers.mjs sidecar
+- District height quantile tables — Planet buildings packs (offline), hk-height-tables.js
+
+Tiny Warsaw (tinywarsaw.app) inspired measured-height + elevated deck ideas;
+we do not vendor their JS, tiles, or road_markings.
+
+Do not serve this at bare /hongkong — that path stays the jubuddy planet SPA.

@@ -1025,8 +1025,34 @@ function buildRoadNetwork(sidewalks, obstacles) {
     c++;
   }
   const genShortKept = edges.filter((e) => e.general).length;
-  const genLost = edges.filter((e) => e.general && comp[e.id] !== bestComp);
-  edges = edges.filter((e) => comp[e.id] === bestComp);
+  let usedWeak = false;
+  let keepComp = bestComp;
+  if (bestSize < 20) {
+    // Centreline-only cities (HK v1: empty avenue grid / GEO.blocks) often form a DAG under directed moves, so the
+    // strong component collapses to 1 and traffic.js then crashes on orphan edges. Fall back to the largest set of
+    // edges that share junctions (undirected road graph); dead-ends are handled by traffic respawn.
+    const atNode = new Map();
+    for (const e of edges) {
+      for (const n of [e.from, e.to]) {
+        if (!atNode.has(n)) atNode.set(n, []);
+        atNode.get(n).push(e);
+      }
+    }
+    const weakNext = (e) => {
+      const out = new Set(e.moves.map((m) => m.to));
+      for (const n of [e.from, e.to]) {
+        for (const o of atNode.get(n) || []) if (o !== e) out.add(o);
+      }
+      return [...out];
+    };
+    const weak = largestWeakComponent(edges, weakNext);
+    usedWeak = true;
+    edges.forEach((e) => { e._weak = weak.has(e); });
+    console.info(`[roads] SCC too small (${bestSize}); using weak component of ${weak.size}`);
+  }
+  const genLost = edges.filter((e) => e.general && (usedWeak ? !e._weak : comp[e.id] !== keepComp));
+  edges = edges.filter((e) => (usedWeak ? e._weak : comp[e.id] === keepComp));
+  for (const e of edges) delete e._weak;
   // Roads kept clear of a road merging with them or forking off them that is gone now (too short, or no way on from it
   // after all) get their stop lines placed again without it
   const kept = new Set(edges);
@@ -1041,7 +1067,7 @@ function buildRoadNetwork(sidewalks, obstacles) {
     for (const n of redo) if (n.general && !n.shape && bends(n)) n.shape = true;
     for (const e of edges) if (redo.has(e.from) || redo.has(e.to)) place(e);
   }
-  console.info(`[roads] centreline edges: ${genCreated} with clear lanes, ${genShortKept} long enough, ${genShortKept - genLost.length} connected`);
+  console.info(`[roads] centreline edges: ${genCreated} with clear lanes, ${genShortKept} long enough, ${genShortKept - genLost.length} connected${usedWeak ? ' (weak)' : ''}`);
   for (const e of edges) {
     e.moves = e.moves.filter((m) => comp[m.to.id] === bestComp);
     serveEveryLane(e);
@@ -1060,7 +1086,20 @@ function buildRoadNetwork(sidewalks, obstacles) {
     (e.from.out || (e.from.out = [])).push(e);
     (e.to.in || (e.to.in = [])).push(e);
   }
-  nodes = nodes.filter((n) => n.in && n.out);
+  if (usedWeak) {
+    // Keep sources/sinks so a DAG weak component still exposes every edge endpoint to sidesAndGroups.
+    nodes = [...new Set(edges.flatMap((e) => [e.from, e.to]))];
+  } else {
+    nodes = nodes.filter((n) => n.in && n.out);
+  }
+  const nodeSet = new Set(nodes);
+  edges = edges.filter((e) => nodeSet.has(e.from) && nodeSet.has(e.to));
+  // Re-link after orphan drop
+  for (const n of nodes) n.in = n.out = null;
+  for (const e of edges) {
+    (e.from.out || (e.from.out = [])).push(e);
+    (e.to.in || (e.to.in = [])).push(e);
+  }
   nodes.forEach((n, i) => (n.id = i));
 
   // 8. Signalized intersections are exactly the ones with signal heads (street-details.js)
@@ -1078,6 +1117,7 @@ function buildRoadNetwork(sidewalks, obstacles) {
   //    arms 0, east-west 1), the widest road at a centreline junction.
   computeArms(edges);
   for (const n of nodes) sidesAndGroups(n);
+  edges = edges.filter((e) => e.inArm && e.outArm && e.inArm.side != null && e.outArm.side != null);
   for (const e of edges) {
     e.inSide = e.inArm.side; // the side of e.to it arrives over
     e.outSide = e.outArm.side; // the side of e.from it leaves over
@@ -1157,6 +1197,40 @@ function largestComponent(list, next) {
     c++;
   }
   return new Set(list.filter((_, i) => comp[i] === best));
+}
+
+// Largest weakly connected set of `list` (undirected over next(e) links). Used when the digraph has no useful SCC
+// (common for centreline-only cities without a Manhattan avenue grid).
+function largestWeakComponent(list, next) {
+  const index = new Map(list.map((e, i) => [e, i]));
+  const adj = list.map(() => []);
+  list.forEach((e, i) => {
+    for (const f of next(e)) {
+      const j = index.get(f);
+      if (j === undefined) continue;
+      adj[i].push(j);
+      adj[j].push(i);
+    }
+  });
+  const seen = new Uint8Array(list.length);
+  let best = [];
+  for (let root = 0; root < list.length; root++) {
+    if (seen[root]) continue;
+    const stack = [root];
+    seen[root] = 1;
+    const comp = [root];
+    while (stack.length) {
+      const i = stack.pop();
+      for (const j of adj[i]) {
+        if (seen[j]) continue;
+        seen[j] = 1;
+        stack.push(j);
+        comp.push(j);
+      }
+    }
+    if (comp.length > best.length) best = comp;
+  }
+  return new Set(best.map((i) => list[i]));
 }
 
 // Cubic Bézier from the end of lane i on edge e to the start of lane j on edge f: a quarter-circle-like
